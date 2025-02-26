@@ -70,11 +70,11 @@ jobs:
     - name: Set Up Upstream Repository
       run: |
         git remote add upstream https://github.com/beeware/toga.git
-        git fetch upstream main
+        git fetch upstream main:upstream-main  # Fetch and rename to avoid conflicts
 
     - name: Run towncrier check
       id: tox
-      run: python -m towncrier.check --compare-with upstream/main
+      run: python -m towncrier.check --compare-with upstream-main
 
     - name: Towncrier Check Resolution Instructions
       if: always() && steps.tox.outcome == 'failure'
